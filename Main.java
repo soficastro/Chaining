@@ -144,6 +144,5 @@ public class Main {
 		    System.out.println(question + " is true");
 		else
 		    System.out.println(question + " is false");
-		    
 	}
 }
