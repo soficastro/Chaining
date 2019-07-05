@@ -3,17 +3,15 @@ import java.util.*;
 class FC {
     public ArrayList<String> rules;
     public ArrayList<String> facts;
-    public ArrayList<String> conflict;
     
     public FC(String r) {
         facts = new ArrayList<String>();
         rules = new ArrayList<String>();
-        conflict = new ArrayList<String>();
         separate(r);
     }
     
     public void separate(String r) {
-        
+	    
         String[] parts = r.split(";");
         
     	for ( int i = 0; i < parts.length; i++ ) {
@@ -59,14 +57,11 @@ class FC {
         boolean isSubset = true;
         
         ArrayList<String> premises = getAllPremises(rule);
-        //System.out.println(premises);
-        //System.out.println(facts);
         
         for ( int j = 0; j < premises.size(); j++ ) {
             if ( !facts.contains(premises.get(j)) ) 
                 isSubset = false;
         }
-        //System.out.println(isSubset);
         return isSubset;
     }
     
@@ -84,11 +79,10 @@ class FC {
     	String[] parts = premise.split("&");
     	
     	for( int i = 0; i < parts.length; i++ ) {
-    			premises.add(parts[i]);
+		premises.add(parts[i]);
     	}
-    	return premises;
+	return premises;
     }
-    
 }
 
 public class Main
@@ -99,14 +93,14 @@ public class Main
 	    
 		System.out.println("Insert rules and facts");
 		System.out.println("Formatation example: a&b->c;d&e->b;f&g->a;x->z;f->g;d->e;d;f");
-		//rules = input.nextLine();
+		rules = input.nextLine();
 		
 		System.out.println("What are you looking for?");
 		System.out.println("Formatation example: c");
-		//question = input.nextLine();
+		question = input.nextLine();
 		
-		rules = "a&b->c;d&e->b;f&g->a;x->z;f->g;d->e;d;f";
-		question = "c";
+		//rules = "a&b->c;d&e->b;f&g->a;x->z;f->g;d->e;d;f";
+		//question = "c";
 		
 	    FC fc = new FC(rules);
 		
@@ -114,6 +108,5 @@ public class Main
 		    System.out.println(question + " is true");
 		else
 		    System.out.println(question + " is false");
-		    
 	}
 }
