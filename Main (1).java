@@ -27,42 +27,31 @@ class FC {
     }
     
     public boolean algorithm(String q) {
-        int factSize;
-        //for each rule
-        for ( int i = 0; i < rules.size(); i++ ) {
-            // verify if facts leads to conclusion
-            if ( verifyRule ( rules.get(i) ) ) {
-                //System.out.println(rules.get(i));
-                factSize = facts.size();
-                //System.out.println(factSize);
-                String conclusion = getConclusion (rules.get(i));
-                System.out.println(conclusion + q);
-                
-                
-                if (!facts.contains(conclusion)) 
-                    facts.add(conclusion);
-                    
-                
-                if (conclusion.equals(q))
-                    return true;
-                else if (facts.size() > factSize) i = 0;
-                else break;
-                
-                
-                
-                
-               
+        
+        while(true) {
+            int factSize = facts.size();
+            
+            for ( int i = 0; i < rules.size(); i++ ) {
+                boolean flag = true;
+                ArrayList<String> premises = getAllPremises(rules.get(i));
+                for ( int j = 0; j < premises.size(); j++ ) {
+                    if( !facts.contains(premises.get(j) )) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag)
+                    facts.add(getConclusion(rules.get(i)));
             }
             
+            if (facts.contains(q)) return true;
+            
+            int newFactSize = facts.size();
+            
+            if (factSize == newFactSize)
+                return false;
+            
         }
-        
-      
-        
-        if ( facts.contains(q) ) return true;
-        
-        
-        
-        return false;
     }
     
     public boolean verifyRule(String rule) {
@@ -128,4 +117,3 @@ public class Main
 		    
 	}
 }
-
