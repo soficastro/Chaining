@@ -25,7 +25,6 @@ class FC {
     }
     
     public boolean algorithm(String q) {
-        
         while(true) {
             int factSize = facts.size();
             
